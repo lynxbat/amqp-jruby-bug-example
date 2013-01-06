@@ -15,8 +15,8 @@ trap('INT') do
 end
 
 EMBug.run_em_test(
-    :task_latency_min => 1,
-    :task_latency_max => 1,
+    :task_latency_min => 10,
+    :task_latency_max => 15,
     :concurrency => ARGV.first.to_i,
     :events_per_sec => 1000000,
 ) do |q|

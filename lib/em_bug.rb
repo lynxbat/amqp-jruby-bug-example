@@ -31,7 +31,7 @@ module EMBug
           @qt << 0
           @qc += 1
           yield @qt
-          sleep latency
+          sleep latency(options[:task_latency_max], options[:task_latency_min])
           @qt.pop
         end
 
@@ -68,8 +68,7 @@ module EMBug
     options[:task_latency_max] ||= 1
 
     EM::threadpool_size = options[:concurrency]
-    latency = (rand(options[:task_latency_max]) + options[:task_latency_min]).to_f / 1000
-    begin
+
     EM.run do
       printer
 
@@ -94,7 +93,7 @@ module EMBug
             @qt << 0
             @qc += 1
             yield @qt
-            sleep latency
+            sleep latency(options[:task_latency_max], options[:task_latency_min])
             metadata.ack
             @qt.pop
           end
@@ -103,13 +102,11 @@ module EMBug
 
       end
     end
-    rescue Java::JavaLang::NullPointerException => e
-      puts e.class.name
-      raise e
-    end
 
+  end
 
-
+  def latency(max, min)
+    (rand((max + 1) - min) + min).to_f / 1000
   end
 
   def command_stage(options = {})
