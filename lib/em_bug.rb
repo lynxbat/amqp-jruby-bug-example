@@ -19,7 +19,6 @@ module EMBug
     options[:events_per_sec] ||= 10
 
     EM::threadpool_size = options[:concurrency]
-    latency = (rand(options[:task_latency_max]) + options[:task_latency_min]).to_f / 1000
     evp_wait = 1.0 / options[:events_per_sec]
 
     EM.run do
