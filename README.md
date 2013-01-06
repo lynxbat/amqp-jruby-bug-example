@@ -42,13 +42,13 @@ With each test script are settings to tweak:
 
 ### Ruby 1.9.3-p327
 
-test_amqp.rb => `works`
-test_em.rb => `works`
+* test_amqp.rb => `works`
+* test_em.rb => `works`
 
 ### JRuby 1.7.1
 
-test_amqp.rb => `fails` => error below
-test_em.rb => `works`
+* test_amqp.rb => `fails` (stack trace below)
+* test_em.rb => `works`
 
 #### Error under JRuby:
 
